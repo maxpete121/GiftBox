@@ -28,6 +28,13 @@ class GiftService{
         activeGift.url = response.data.url
         AppState.emit('Gifts')
     }
+
+
+    async createGift(formData){
+        const response = await api.post('api/gifts', formData)
+        const newGift = new Gift(response.data)
+        AppState.Gifts.push(newGift)
+    }
 }
 
 export const giftService = new GiftService()
