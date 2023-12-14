@@ -7,12 +7,15 @@ function _drawGifts(){
     let content = ''
     gift.forEach(gifts => content += gifts.giftTemplate)
     document.getElementById('gift-view').innerHTML = content
+    console.log('draw')
 }
 
 export class GiftController{
     constructor(){
         console.log('gift controller loaded')
         AppState.on('user', this.getGifts)
+        // AppState.on('', this.getGifts)
+        AppState.on('Gifts', _drawGifts)
         // AppState.on('user', _drawGifts)
     }
 
@@ -23,7 +26,8 @@ export class GiftController{
     }
 
     async openGift(giftId){
-       await giftService.openGift(giftId) 
+       await giftService.openGift(giftId)
+       _drawGifts() 
     }
 
 
