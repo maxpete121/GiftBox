@@ -23,7 +23,7 @@ export class GiftController{
         console.log('gift controller loaded')
         AppState.on('user', this.getGifts)
         AppState.on('Gifts', _drawGifts)
-        AppState.on('SearchedGifts', _drawSearched)
+        AppState.on('SearchedGifts', _drawSearched) //Search wont redraw when things are opened or deleted so this is needed
         // AppState.on('user', _drawGifts)
     }
 
@@ -36,8 +36,8 @@ export class GiftController{
     async openGift(giftId){
        await giftService.openGift(giftId)
        _drawGifts()
-       if(AppState.SearchedGifts != null){
-        _drawSearched()
+       if(AppState.SearchedGifts != null){// searchGift in the appstate. It is null to start. Without the IF statement it will try to draw empty and throw an error
+        _drawSearched()// needed incase gift is opened from search area
        } 
     }
 
@@ -53,12 +53,12 @@ export class GiftController{
         event.preventDefault()
         let form = event.target
         let formData = getFormData(form)
-        await giftService.searchGift(formData)
+        await giftService.searchGift(formData)// Form for the search only has a name value on it. It will bring up all objects with that name.
         _drawSearched()
     }
 
     async deleteGift(giftId){
-        await giftService.deleteGift(giftId)
+        await giftService.deleteGift(giftId)// Id is passed through delete button to find which gift to delete.
         _drawGifts()
         
         // if(AppState.SearchedGifts != null){
