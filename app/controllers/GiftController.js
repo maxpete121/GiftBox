@@ -36,7 +36,7 @@ export class GiftController{
     async openGift(giftId){
        await giftService.openGift(giftId)
        _drawGifts()
-       if(AppState.SearchedGifts != null){// searchGift in the appstate. It is null to start. Without the IF statement it will try to draw empty and throw an error
+       if(AppState.SearchedGifts != null){// searchGift in the appState. It is null to start. Without the IF statement it will try to draw empty and throw an error
         _drawSearched()// needed incase gift is opened from search area
        } 
     }
