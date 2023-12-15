@@ -35,6 +35,17 @@ class GiftService{
         const newGift = new Gift(response.data)
         AppState.Gifts.push(newGift)
     }
+
+
+    async searchGift(formData){
+        console.log(formData.tag)
+        let gifts = AppState.Gifts
+        let searchedGifts = gifts.filter(gift => gift.tag == formData.tag)
+        console.log('gifts with name', searchedGifts)
+        AppState.SearchedGifts = searchedGifts
+        console.log(AppState.SearchedGifts)
+
+    }
 }
 
 export const giftService = new GiftService()

@@ -11,6 +11,13 @@ function _drawGifts(){
     console.log('draw')
 }
 
+function _drawSearched(){
+    const sGifts = AppState.SearchedGifts
+    let content = ''
+    sGifts.forEach(gift => content += gift.giftTemplate)
+    document.getElementById('searched-gifts').innerHTML = content
+}
+
 export class GiftController{
     constructor(){
         console.log('gift controller loaded')
@@ -28,7 +35,10 @@ export class GiftController{
 
     async openGift(giftId){
        await giftService.openGift(giftId)
-       _drawGifts() 
+       _drawGifts()
+       if(AppState.SearchedGifts != null){
+        _drawSearched()
+       } 
     }
 
     async createGift(){
@@ -37,6 +47,14 @@ export class GiftController{
         let formData = getFormData(form)
         await giftService.createGift(formData)
         form.reset() 
+    }
+
+    async searchGift(){
+        event.preventDefault()
+        let form = event.target
+        let formData = getFormData(form)
+        await giftService.searchGift(formData)
+        _drawSearched()
     }
 
 
