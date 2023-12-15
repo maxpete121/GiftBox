@@ -23,7 +23,7 @@ export class Gift{
         `
     }
 
-    get creatorDelete(){
+    get creatorDelete(){//This checks if all items have our creator Id. If they do it adds a delete button. This template gets added above to the gift template
         if(this.creatorId == '6578c7d1c66a9dfc602590f2'){
             return`<button onclick="app.GiftController.deleteGift('${this.id}')">Delete</button>`
         }else{

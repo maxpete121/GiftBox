@@ -40,21 +40,21 @@ class GiftService{
     async searchGift(formData){
         console.log(formData.tag)
         let gifts = AppState.Gifts
-        let searchedGifts = gifts.filter(gift => gift.tag == formData.tag)
+        let searchedGifts = gifts.filter(gift => gift.tag == formData.tag)//Form data only passed through the items tag. This matches the tag to the items we are searching
         console.log('gifts with name', searchedGifts)
-        AppState.SearchedGifts = searchedGifts
+        AppState.SearchedGifts = searchedGifts//puts gifts that we found in our filter above into the SearchedGifts array in the appState
         console.log(AppState.SearchedGifts)
 
     }
 
     async deleteGift(giftId){
-        const response = await api.delete(`api/gifts/${giftId}`)
-        const indexToRemove = AppState.Gifts.findIndex(gift => gift.id == giftId)
+        const response = await api.delete(`api/gifts/${giftId}`)// deletes the gift in the api
+        const indexToRemove = AppState.Gifts.findIndex(gift => gift.id == giftId)//grabs the gift we want to delete from our appState
         console.log('delete', indexToRemove)
-        AppState.Gifts.splice(indexToRemove, 1)
+        AppState.Gifts.splice(indexToRemove, 1)// removes the gift from our appState to trigger our listeners redraw
         if(AppState.SearchedGifts != null){
             const removeIndex = AppState.SearchedGifts.findIndex(gifts => gifts.id == giftId)
-            AppState.SearchedGifts.splice(removeIndex, 1)
+            AppState.SearchedGifts.splice(removeIndex, 1)//Removes item from the search array if the item that is getting deleted is in the search view
         }
     }
 }
