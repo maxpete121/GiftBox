@@ -5,15 +5,15 @@
                 <h3>Create a Gift!</h3>
                 <form class="mb-4" onsubmit="app.GiftController.createGift()">
                     <label id="url-label">Image Url:</label>
-                    <input type="url" name="url">
+                    <input required type="url" name="url">
                     <label for="">Gift Name:</label>
-                    <input type="text" name="tag">
+                    <input required type="text" name="tag">
                     <button>Create</button>
                 </form>
             </div>
             <form onsubmit="app.GiftController.searchGift()">
                 <label>Search Gifts by name:</label>
-                <input type="text" name="tag">
+                <input required type="text" name="tag">
                 <button>Search</button>
             </form>
             <div id="searched-gifts"></div>

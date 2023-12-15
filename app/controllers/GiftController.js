@@ -22,8 +22,8 @@ export class GiftController{
     constructor(){
         console.log('gift controller loaded')
         AppState.on('user', this.getGifts)
-        // AppState.on('', this.getGifts)
         AppState.on('Gifts', _drawGifts)
+        AppState.on('SearchedGifts', _drawSearched)
         // AppState.on('user', _drawGifts)
     }
 
@@ -58,7 +58,12 @@ export class GiftController{
     }
 
     async deleteGift(giftId){
+        await giftService.deleteGift(giftId)
+        _drawGifts()
         
+        // if(AppState.SearchedGifts != null){
+        //     _drawSearched()
+        //    } 
     }
 
 

@@ -49,8 +49,13 @@ class GiftService{
 
     async deleteGift(giftId){
         const response = await api.delete(`api/gifts/${giftId}`)
-        const indexToRemove = AppState.Gifts.findIndex(gift => gift.id == gift)
+        const indexToRemove = AppState.Gifts.findIndex(gift => gift.id == giftId)
         console.log('delete', indexToRemove)
+        AppState.Gifts.splice(indexToRemove, 1)
+        if(AppState.SearchedGifts != null){
+            const removeIndex = AppState.SearchedGifts.findIndex(gifts => gifts.id == giftId)
+            AppState.SearchedGifts.splice(removeIndex, 1)
+        }
     }
 }
 
