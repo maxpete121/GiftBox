@@ -57,5 +57,9 @@ export class GiftController{
         _drawSearched()
     }
 
+    async deleteGift(giftId){
+        
+    }
+
 
 }

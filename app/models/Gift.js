@@ -16,9 +16,18 @@ export class Gift{
         <img src="${this.url}">
         <div>${this.tag}</div>
         <span>
-        <button onclick="app.GiftController.openGift('${this.id}')">Open</button
+        <button onclick="app.GiftController.openGift('${this.id}')">Open</button>
+        ${this.creatorDelete}
         </span>
         </div>
         `
+    }
+
+    get creatorDelete(){
+        if(this.creatorId == '6578c7d1c66a9dfc602590f2'){
+            return`<button onclick="app.GiftController.deleteGift('${this.id}')">Delete</button>`
+        }else{
+            return ``
+        }
     }
 }
